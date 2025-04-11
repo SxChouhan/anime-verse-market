@@ -9,14 +9,17 @@ import TypewriterText from '@/components/TypewriterText';
 import ProductCard from '@/components/ProductCard';
 import { useAuth } from '@/context/AuthContext';
 import { getTrendingProducts, getAnimeCategories, getProductCategories } from '@/data/products';
+import { useBreakpoint } from '@/hooks/use-mobile';
 
 const Home = () => {
   const { user } = useAuth();
   const [isVideoLoaded, setIsVideoLoaded] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const breakpoint = useBreakpoint();
   
-  const trendingProducts = getTrendingProducts();
-  const animeCategories = getAnimeCategories().slice(0, 10); // Top 10 anime
+  // Get more trending products (at least 8 now)
+  const trendingProducts = getTrendingProducts().slice(0, 8);
+  const animeCategories = getAnimeCategories().slice(0, 11); // Top 11 anime (added one more)
   const productCategories = getProductCategories();
   
   const typewriterTexts = [
@@ -41,6 +44,14 @@ const Home = () => {
     if (trendingSection) {
       trendingSection.scrollIntoView({ behavior: 'smooth' });
     }
+  };
+
+  // Section background styles
+  const sectionBackgroundStyles = {
+    trending: "bg-gradient-to-b from-gray-100 to-white dark:from-otaku-dark/40 dark:to-otaku-dark/20",
+    anime: "bg-gradient-to-r from-gray-50 to-white dark:from-otaku-dark/50 dark:to-otaku-dark/30",
+    product: "bg-gradient-to-b from-white to-gray-100 dark:from-otaku-dark/20 dark:to-otaku-dark/40",
+    review: "bg-gradient-to-r from-white to-gray-50 dark:from-otaku-dark/30 dark:to-otaku-dark/50"
   };
 
   return (
@@ -90,7 +101,7 @@ const Home = () => {
                 <Button 
                   variant="outline" 
                   size="lg"
-                  className="border-white text-black hover:bg-white hover:text-otaku-dark font-medium"
+                  className="border-white text-white hover:bg-white hover:text-otaku-dark font-medium"
                   asChild
                 >
                   <Link to="/login">Login</Link>
@@ -102,7 +113,7 @@ const Home = () => {
       </section>
       
       {/* Trending Products Section */}
-      <section id="trending-section" className="py-16 bg-gray-50 dark:bg-otaku-dark/30">
+      <section id="trending-section" className={`py-16 ${sectionBackgroundStyles.trending}`}>
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-12">
             Trending Products
@@ -128,13 +139,13 @@ const Home = () => {
       </section>
       
       {/* Shop by Anime Section */}
-      <section className="py-16 bg-white dark:bg-otaku-dark/50">
+      <section className={`py-16 ${sectionBackgroundStyles.anime}`}>
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-12">
             Shop by Anime
           </h2>
           
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
             {animeCategories.map(anime => (
               <Link 
                 key={anime} 
@@ -154,8 +165,8 @@ const Home = () => {
                   </div>
                 </div>
                 
-                <div className="p-4 text-center">
-                  <h3 className="font-medium group-hover:text-otaku-purple transition-colors">
+                <div className="p-3 text-center">
+                  <h3 className="font-medium text-sm truncate group-hover:text-otaku-purple transition-colors">
                     {anime}
                   </h3>
                 </div>
@@ -177,59 +188,51 @@ const Home = () => {
       </section>
       
       {/* Shop by Product Section */}
-      <section className="py-16 bg-gray-50 dark:bg-otaku-dark/30">
+      <section className={`py-16 ${sectionBackgroundStyles.product}`}>
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-12">
             Shop by Product
           </h2>
           
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-            {productCategories.map(category => {
-              const categoryImage = category === 'merchandise' ? 'https://placeholder.com/400x500' :
-                            category === 'costumes' ? 'https://placeholder.com/400x500' :
-                            category === 'figures' ? 'https://placeholder.com/400x500' :
-                            category === 'posters' ? 'https://placeholder.com/400x500' : 
-                            'https://placeholder.com/400x500';
-              
-              return (
-                <Link 
-                  key={category}
-                  to={`/${category.toLowerCase()}`}
-                  className="group relative overflow-hidden rounded-lg shadow-md h-64"
-                >
-                  <img 
-                    src="/placeholder.svg" 
-                    alt={category}
-                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
-                  
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-6">
-                    <div>
-                      <h3 className="text-xl font-bold text-white capitalize mb-2">
-                        {category}
-                      </h3>
-                      <span className="inline-block text-white font-medium underline transform translate-y-0 group-hover:translate-y-0 opacity-100 group-hover:opacity-100 transition-all duration-300">
-                        Shop Now
-                      </span>
-                    </div>
+            {productCategories.map(category => (
+              <Link 
+                key={category}
+                to={`/${category.toLowerCase()}`}
+                className="group relative overflow-hidden rounded-lg shadow-md h-64"
+              >
+                <img 
+                  src="/placeholder.svg" 
+                  alt={category}
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+                
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-6">
+                  <div>
+                    <h3 className="text-xl font-bold text-white capitalize mb-2">
+                      {category}
+                    </h3>
+                    <span className="inline-block text-white font-medium underline transform translate-y-0 group-hover:translate-y-0 opacity-100 group-hover:opacity-100 transition-all duration-300">
+                      Shop Now
+                    </span>
                   </div>
-                </Link>
-              );
-            })}
+                </div>
+              </Link>
+            ))}
           </div>
         </div>
       </section>
       
       {/* Review Section */}
-      <section className="py-16 bg-white dark:bg-otaku-dark/50">
+      <section className={`py-16 ${sectionBackgroundStyles.review}`}>
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-12">
             Customer Reviews
           </h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {/* Review Card 1 */}
-            <div className="bg-white dark:bg-otaku-dark shadow-lg p-6 rounded-lg">
+            <div className="bg-white dark:bg-otaku-dark shadow-lg p-6 rounded-lg hover:shadow-xl transition-shadow">
               <div className="flex items-center mb-4">
                 <div className="bg-gray-200 rounded-full w-12 h-12"></div>
                 <div className="ml-4">
@@ -254,7 +257,7 @@ const Home = () => {
             </div>
             
             {/* Review Card 2 */}
-            <div className="bg-white dark:bg-otaku-dark shadow-lg p-6 rounded-lg">
+            <div className="bg-white dark:bg-otaku-dark shadow-lg p-6 rounded-lg hover:shadow-xl transition-shadow">
               <div className="flex items-center mb-4">
                 <div className="bg-gray-200 rounded-full w-12 h-12"></div>
                 <div className="ml-4">
@@ -279,7 +282,7 @@ const Home = () => {
             </div>
             
             {/* Review Card 3 */}
-            <div className="bg-white dark:bg-otaku-dark shadow-lg p-6 rounded-lg">
+            <div className="bg-white dark:bg-otaku-dark shadow-lg p-6 rounded-lg hover:shadow-xl transition-shadow">
               <div className="flex items-center mb-4">
                 <div className="bg-gray-200 rounded-full w-12 h-12"></div>
                 <div className="ml-4">
