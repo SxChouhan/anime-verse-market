@@ -90,7 +90,7 @@ const Home = () => {
                 <Button 
                   variant="outline" 
                   size="lg"
-                  className="border-white text-white hover:bg-white hover:text-otaku-dark font-medium"
+                  className="border-white text-black hover:bg-white hover:text-otaku-dark font-medium"
                   asChild
                 >
                   <Link to="/login">Login</Link>
