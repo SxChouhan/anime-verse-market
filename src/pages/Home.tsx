@@ -77,11 +77,6 @@ const Home = () => {
               />
             </h1>
             
-            <p className="text-lg text-white mb-8 animate-fade-in drop-shadow-md max-w-lg">
-              Discover authentic anime merchandise from your favorite series,
-              handpicked for true otaku like you.
-            </p>
-            
             <div className="flex flex-wrap gap-4">
               <Button 
                 onClick={scrollToTrending}
