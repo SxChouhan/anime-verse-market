@@ -57,27 +57,27 @@ const Home = () => {
             muted 
             loop 
             playsInline
-            className="w-full h-full object-cover opacity-80"
+            className="w-full h-full object-cover opacity-70"
           >
             <source src="https://cdn.jsdelivr.net/gh/codewithsadee/animeflix/assets/images/hero-banner.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
           
-          <div className={`absolute inset-0 hero-gradient transition-opacity duration-1000 ${isVideoLoaded ? 'opacity-100' : 'opacity-0'}`}></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-transparent"></div>
         </div>
         
         {/* Hero Content */}
         <div className="container mx-auto px-4 relative z-10 mt-16">
           <div className="max-w-2xl">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 animate-fade-in">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 animate-fade-in drop-shadow-lg">
               Your One-Stop Shop for Premium <br />
               <TypewriterText 
                 textArray={typewriterTexts}
-                className="text-otaku-purple"
+                className="text-otaku-purple font-extrabold"
               />
             </h1>
             
-            <p className="text-lg text-gray-200 mb-8 animate-fade-in">
+            <p className="text-lg text-white mb-8 animate-fade-in drop-shadow-md max-w-lg">
               Discover authentic anime merchandise from your favorite series,
               handpicked for true otaku like you.
             </p>
@@ -86,7 +86,7 @@ const Home = () => {
               <Button 
                 onClick={scrollToTrending}
                 size="lg"
-                className="bg-otaku-purple hover:bg-otaku-purple/90 text-white"
+                className="bg-otaku-purple hover:bg-otaku-purple/90 text-white font-medium"
               >
                 Shop Now <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
@@ -95,7 +95,7 @@ const Home = () => {
                 <Button 
                   variant="outline" 
                   size="lg"
-                  className="border-white text-white hover:bg-white hover:text-otaku-dark"
+                  className="border-white text-white hover:bg-white hover:text-otaku-dark font-medium"
                   asChild
                 >
                   <Link to="/login">Login</Link>

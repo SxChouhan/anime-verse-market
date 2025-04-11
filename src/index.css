@@ -88,12 +88,42 @@
     right: -5px;
     top: 0;
     height: 100%;
-    width: 2px;
+    width: 3px;
     background-color: currentColor;
     animation: blink 1s step-end infinite;
   }
+
+  @keyframes blink {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.8s ease-out forwards;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 }
 
-.hero-gradient {
-  background: linear-gradient(90deg, rgba(26,31,44,0.95) 0%, rgba(26,31,44,0.8) 50%, rgba(26,31,44,0.4) 100%);
+/* Remove original hero-gradient class and add new styles */
+.hero-gradient-left {
+  background: linear-gradient(90deg, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.8) 50%, rgba(0,0,0,0.3) 100%);
+}
+
+/* Add drop shadow for text visibility */
+.text-shadow {
+  text-shadow: 0 2px 4px rgba(0,0,0,0.8);
 }
