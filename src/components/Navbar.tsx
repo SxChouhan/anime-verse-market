@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Menu, X, ShoppingCart, User } from 'lucide-react';
@@ -13,7 +12,6 @@ const Navbar = () => {
   const { user, logout } = useAuth();
   const { getTotalItems } = useCart();
 
-  // Handle scroll effect
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
@@ -31,12 +29,10 @@ const Navbar = () => {
     >
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between py-4">
-          {/* Logo */}
           <Link to="/" className="text-white text-xl font-bold drop-shadow-md">
             Otaku Collective
           </Link>
 
-          {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-6">
             <Link to="/merchandise" className="text-white hover:text-otaku-purple transition-colors font-medium">
               Merchandise
@@ -58,9 +54,7 @@ const Navbar = () => {
             </Link>
           </nav>
 
-          {/* Right side buttons */}
           <div className="flex items-center space-x-4">
-            {/* Cart with counter */}
             <Button 
               variant="ghost" 
               size="icon" 
@@ -75,7 +69,6 @@ const Navbar = () => {
               )}
             </Button>
 
-            {/* User area */}
             {user ? (
               <div className="relative group">
                 <Button 
@@ -98,7 +91,6 @@ const Navbar = () => {
               </Button>
             )}
 
-            {/* Mobile menu button */}
             <Button
               variant="ghost"
               size="icon"
@@ -111,7 +103,6 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Mobile Navigation */}
       {mobileMenuOpen && (
         <div className="md:hidden bg-otaku-dark/95 backdrop-blur-md py-4 border-t border-gray-800">
           <div className="container mx-auto px-4 flex flex-col space-y-4">

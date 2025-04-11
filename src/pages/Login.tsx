@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Eye, EyeOff } from 'lucide-react';
@@ -159,6 +158,7 @@ const Login = () => {
                       type="submit"
                       className="w-full bg-otaku-purple hover:bg-otaku-purple/90"
                       disabled={isLoading}
+                      onClick={handleLogin}
                     >
                       {isLoading ? 'Logging in...' : 'Login'}
                     </Button>
@@ -239,6 +239,7 @@ const Login = () => {
                       type="submit"
                       className="w-full bg-otaku-purple hover:bg-otaku-purple/90"
                       disabled={isLoading}
+                      onClick={handleSignup}
                     >
                       {isLoading ? 'Creating account...' : 'Sign Up'}
                     </Button>
