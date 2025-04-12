@@ -101,7 +101,7 @@ const Home = () => {
                 <Button 
                   variant="outline" 
                   size="lg"
-                  className="border-white/70 text-white hover:bg-white hover:text-otaku-dark font-medium flex items-center gap-2 transition-all duration-300 ease-in-out"
+                  className="border-white/70 text-otaku-dark hover:bg-white hover:text-otaku-dark font-medium flex items-center gap-2 transition-all duration-300 ease-in-out"
                   onClick={handleLoginClick}
                 >
                   <LogIn className="h-5 w-5" /> Login
