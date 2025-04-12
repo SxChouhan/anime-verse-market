@@ -1,7 +1,6 @@
-
 import { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
-import { ArrowRight } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
+import { ArrowRight, LogIn } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -16,12 +15,12 @@ const Home = () => {
   const [isVideoLoaded, setIsVideoLoaded] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const breakpoint = useBreakpoint();
-  
-  // Get more trending products (at least 8 now)
+  const navigate = useNavigate();
+
   const trendingProducts = getTrendingProducts().slice(0, 8);
-  const animeCategories = getAnimeCategories().slice(0, 11); // Top 11 anime (added one more)
+  const animeCategories = getAnimeCategories().slice(0, 11);
   const productCategories = getProductCategories();
-  
+
   const typewriterTexts = [
     'Merchandise',
     'Costumes',
@@ -30,7 +29,7 @@ const Home = () => {
     'Stickers',
     'Unique Products'
   ];
-  
+
   useEffect(() => {
     if (videoRef.current) {
       videoRef.current.addEventListener('loadeddata', () => {
@@ -46,7 +45,11 @@ const Home = () => {
     }
   };
 
-  // Section background styles
+  const handleLoginClick = () => {
+    navigate('/login');
+    window.scrollTo(0, 0);
+  };
+
   const sectionBackgroundStyles = {
     trending: "bg-gradient-to-b from-gray-100 to-white dark:from-otaku-dark/40 dark:to-otaku-dark/20",
     anime: "bg-gradient-to-r from-gray-50 to-white dark:from-otaku-dark/50 dark:to-otaku-dark/30",
@@ -58,9 +61,7 @@ const Home = () => {
     <div className="min-h-screen flex flex-col">
       <Navbar />
       
-      {/* Hero Section */}
       <section className="relative h-screen w-full overflow-hidden flex items-center">
-        {/* Video Background */}
         <div className="absolute inset-0 z-0">
           <video 
             ref={videoRef}
@@ -77,7 +78,6 @@ const Home = () => {
           <div className="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-transparent"></div>
         </div>
         
-        {/* Hero Content */}
         <div className="container mx-auto px-4 relative z-10 mt-16">
           <div className="max-w-2xl">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 animate-fade-in drop-shadow-lg">
@@ -101,10 +101,10 @@ const Home = () => {
                 <Button 
                   variant="outline" 
                   size="lg"
-                  className="border-white text-white hover:bg-white hover:text-otaku-dark font-medium"
-                  asChild
+                  className="border-white/70 text-white hover:bg-white hover:text-otaku-dark font-medium flex items-center gap-2 transition-all duration-300 ease-in-out"
+                  onClick={handleLoginClick}
                 >
-                  <Link to="/login">Login</Link>
+                  <LogIn className="h-5 w-5" /> Login
                 </Button>
               )}
             </div>
@@ -112,7 +112,6 @@ const Home = () => {
         </div>
       </section>
       
-      {/* Trending Products Section */}
       <section id="trending-section" className={`py-16 ${sectionBackgroundStyles.trending}`}>
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-12">
@@ -138,7 +137,6 @@ const Home = () => {
         </div>
       </section>
       
-      {/* Shop by Anime Section */}
       <section className={`py-16 ${sectionBackgroundStyles.anime}`}>
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-12">
@@ -187,7 +185,6 @@ const Home = () => {
         </div>
       </section>
       
-      {/* Shop by Product Section */}
       <section className={`py-16 ${sectionBackgroundStyles.product}`}>
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-12">
@@ -223,7 +220,6 @@ const Home = () => {
         </div>
       </section>
       
-      {/* Review Section */}
       <section className={`py-16 ${sectionBackgroundStyles.review}`}>
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-12">
@@ -231,7 +227,6 @@ const Home = () => {
           </h2>
           
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Review Card 1 */}
             <div className="bg-white dark:bg-otaku-dark shadow-lg p-6 rounded-lg hover:shadow-xl transition-shadow">
               <div className="flex items-center mb-4">
                 <div className="bg-gray-200 rounded-full w-12 h-12"></div>
@@ -256,7 +251,6 @@ const Home = () => {
               </div>
             </div>
             
-            {/* Review Card 2 */}
             <div className="bg-white dark:bg-otaku-dark shadow-lg p-6 rounded-lg hover:shadow-xl transition-shadow">
               <div className="flex items-center mb-4">
                 <div className="bg-gray-200 rounded-full w-12 h-12"></div>
@@ -281,7 +275,6 @@ const Home = () => {
               </div>
             </div>
             
-            {/* Review Card 3 */}
             <div className="bg-white dark:bg-otaku-dark shadow-lg p-6 rounded-lg hover:shadow-xl transition-shadow">
               <div className="flex items-center mb-4">
                 <div className="bg-gray-200 rounded-full w-12 h-12"></div>
@@ -316,7 +309,6 @@ const Home = () => {
 
 export default Home;
 
-// Helper component
 const Star = ({ size, className }: { size: number, className: string }) => {
   return (
     <svg 
