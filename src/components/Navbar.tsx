@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Menu, X, ShoppingCart, User } from 'lucide-react';
@@ -24,7 +25,9 @@ const Navbar = () => {
   return (
     <header 
       className={`fixed w-full top-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-otaku-dark/95 backdrop-blur-sm shadow-md' : 'bg-gradient-to-b from-black/80 to-transparent'
+        isScrolled 
+          ? 'bg-otaku-dark/70 backdrop-blur-md shadow-lg' 
+          : 'bg-transparent'
       }`}
     >
       <div className="container mx-auto px-4">
@@ -58,7 +61,7 @@ const Navbar = () => {
             <Button 
               variant="ghost" 
               size="icon" 
-              className="text-white relative hover:bg-white/10"
+              className="text-white relative hover:bg-white/10 rounded-full"
               onClick={() => navigate('/cart')}
             >
               <ShoppingCart size={20} />
@@ -74,7 +77,7 @@ const Navbar = () => {
                 <Button 
                   variant="ghost" 
                   size="icon"
-                  className="text-white hover:bg-white/10"
+                  className="text-white hover:bg-white/10 rounded-full"
                   onClick={() => navigate('/profile')}
                 >
                   <User size={20} />
@@ -84,7 +87,7 @@ const Navbar = () => {
               <Button 
                 variant="outline" 
                 size="sm" 
-                className="border-otaku-purple text-white bg-otaku-purple/20 hover:bg-otaku-purple"
+                className="border-otaku-purple text-white hover:bg-otaku-purple/80 bg-otaku-purple/50 hover:text-white rounded-full"
                 onClick={() => navigate('/login')}
               >
                 Login
@@ -94,7 +97,7 @@ const Navbar = () => {
             <Button
               variant="ghost"
               size="icon"
-              className="md:hidden text-white hover:bg-white/10"
+              className="md:hidden text-white hover:bg-white/10 rounded-full"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             >
               {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -104,7 +107,7 @@ const Navbar = () => {
       </div>
 
       {mobileMenuOpen && (
-        <div className="md:hidden bg-otaku-dark/95 backdrop-blur-md py-4 border-t border-gray-800">
+        <div className="md:hidden bg-otaku-dark/80 backdrop-blur-md py-4 border-t border-gray-800 animate-fade-in">
           <div className="container mx-auto px-4 flex flex-col space-y-4">
             <Link 
               to="/merchandise" 
