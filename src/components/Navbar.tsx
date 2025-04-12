@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Menu, X, ShoppingCart, User } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/context/AuthContext';
@@ -10,6 +10,7 @@ const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
   const { user, logout } = useAuth();
   const { getTotalItems } = useCart();
 
@@ -28,6 +29,29 @@ const Navbar = () => {
     };
   }, []);
 
+  // Scroll to top when route changes
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
+
+  const handleNavigation = (path: string) => {
+    navigate(path);
+    setMobileMenuOpen(false);
+    window.scrollTo(0, 0); // Ensure we're at the top of the page
+  };
+
+  const handleLogoClick = (e: React.MouseEvent) => {
+    // If we're already on the home page, prevent default and scroll to top
+    if (location.pathname === '/') {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      navigate('/');
+      window.scrollTo(0, 0);
+    }
+    setMobileMenuOpen(false);
+  };
+
   return (
     <header 
       className="fixed w-full top-0 z-50 transition-all duration-300"
@@ -39,29 +63,51 @@ const Navbar = () => {
             : 'bg-black/30 backdrop-blur-sm'
         }`}>
           <div className="flex items-center justify-between">
-            <Link to="/" className="text-white text-xl font-bold drop-shadow-md">
+            <a 
+              href="/" 
+              className="text-white text-xl font-bold drop-shadow-md"
+              onClick={handleLogoClick}
+            >
               Otaku Collective
-            </Link>
+            </a>
 
             <nav className="hidden md:flex items-center space-x-6">
-              <Link to="/merchandise" className="text-white hover:text-otaku-purple transition-colors font-medium">
+              <button 
+                className="text-white hover:text-otaku-purple transition-colors font-medium"
+                onClick={() => handleNavigation('/merchandise')}
+              >
                 Merchandise
-              </Link>
-              <Link to="/costumes" className="text-white hover:text-otaku-purple transition-colors font-medium">
+              </button>
+              <button 
+                className="text-white hover:text-otaku-purple transition-colors font-medium"
+                onClick={() => handleNavigation('/costumes')}
+              >
                 Costumes
-              </Link>
-              <Link to="/figures" className="text-white hover:text-otaku-purple transition-colors font-medium">
+              </button>
+              <button 
+                className="text-white hover:text-otaku-purple transition-colors font-medium"
+                onClick={() => handleNavigation('/figures')}
+              >
                 Figures
-              </Link>
-              <Link to="/posters" className="text-white hover:text-otaku-purple transition-colors font-medium">
+              </button>
+              <button 
+                className="text-white hover:text-otaku-purple transition-colors font-medium"
+                onClick={() => handleNavigation('/posters')}
+              >
                 Posters
-              </Link>
-              <Link to="/unique" className="text-white hover:text-otaku-purple transition-colors font-medium">
+              </button>
+              <button 
+                className="text-white hover:text-otaku-purple transition-colors font-medium"
+                onClick={() => handleNavigation('/unique')}
+              >
                 Unique
-              </Link>
-              <Link to="/custom" className="text-white hover:text-otaku-purple transition-colors font-medium">
+              </button>
+              <button 
+                className="text-white hover:text-otaku-purple transition-colors font-medium"
+                onClick={() => handleNavigation('/custom')}
+              >
                 Custom
-              </Link>
+              </button>
             </nav>
 
             <div className="flex items-center space-x-4">
@@ -69,7 +115,7 @@ const Navbar = () => {
                 variant="ghost" 
                 size="icon" 
                 className="text-white relative hover:bg-white/10 rounded-full"
-                onClick={() => navigate('/cart')}
+                onClick={() => handleNavigation('/cart')}
               >
                 <ShoppingCart size={20} />
                 {getTotalItems() > 0 && (
@@ -85,7 +131,7 @@ const Navbar = () => {
                     variant="ghost" 
                     size="icon"
                     className="text-white hover:bg-white/10 rounded-full"
-                    onClick={() => navigate('/profile')}
+                    onClick={() => handleNavigation('/profile')}
                   >
                     <User size={20} />
                   </Button>
@@ -95,7 +141,7 @@ const Navbar = () => {
                   variant="outline" 
                   size="sm" 
                   className="border-otaku-purple text-white hover:bg-otaku-purple hover:text-white bg-otaku-purple/50 rounded-full"
-                  onClick={() => navigate('/login')}
+                  onClick={() => handleNavigation('/login')}
                 >
                   Login
                 </Button>
@@ -117,48 +163,42 @@ const Navbar = () => {
       {mobileMenuOpen && (
         <div className="md:hidden bg-otaku-dark/80 backdrop-blur-lg py-4 border-t border-gray-800 animate-fade-in">
           <div className="container mx-auto px-4 flex flex-col space-y-4">
-            <Link 
-              to="/merchandise" 
-              className="text-white hover:text-otaku-purple transition-colors font-medium"
-              onClick={() => setMobileMenuOpen(false)}
+            <button 
+              className="text-white hover:text-otaku-purple transition-colors font-medium text-left"
+              onClick={() => handleNavigation('/merchandise')}
             >
               Merchandise
-            </Link>
-            <Link 
-              to="/costumes" 
-              className="text-white hover:text-otaku-purple transition-colors font-medium"
-              onClick={() => setMobileMenuOpen(false)}
+            </button>
+            <button 
+              className="text-white hover:text-otaku-purple transition-colors font-medium text-left"
+              onClick={() => handleNavigation('/costumes')}
             >
               Costumes
-            </Link>
-            <Link 
-              to="/figures" 
-              className="text-white hover:text-otaku-purple transition-colors font-medium"
-              onClick={() => setMobileMenuOpen(false)}
+            </button>
+            <button 
+              className="text-white hover:text-otaku-purple transition-colors font-medium text-left"
+              onClick={() => handleNavigation('/figures')}
             >
               Figures
-            </Link>
-            <Link 
-              to="/posters" 
-              className="text-white hover:text-otaku-purple transition-colors font-medium"
-              onClick={() => setMobileMenuOpen(false)}
+            </button>
+            <button 
+              className="text-white hover:text-otaku-purple transition-colors font-medium text-left"
+              onClick={() => handleNavigation('/posters')}
             >
               Posters
-            </Link>
-            <Link 
-              to="/unique" 
-              className="text-white hover:text-otaku-purple transition-colors font-medium"
-              onClick={() => setMobileMenuOpen(false)}
+            </button>
+            <button 
+              className="text-white hover:text-otaku-purple transition-colors font-medium text-left"
+              onClick={() => handleNavigation('/unique')}
             >
               Unique
-            </Link>
-            <Link 
-              to="/custom" 
-              className="text-white hover:text-otaku-purple transition-colors font-medium"
-              onClick={() => setMobileMenuOpen(false)}
+            </button>
+            <button 
+              className="text-white hover:text-otaku-purple transition-colors font-medium text-left"
+              onClick={() => handleNavigation('/custom')}
             >
               Custom
-            </Link>
+            </button>
           </div>
         </div>
       )}
