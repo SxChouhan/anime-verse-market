@@ -19,12 +19,18 @@ const Navbar = () => {
     };
 
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    
+    // Set CSS variable for navbar height to be used by other components
+    document.documentElement.style.setProperty('--navbar-height', '72px'); // Adjust if needed
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   return (
     <header 
-      className={`fixed w-full top-0 z-50 transition-all duration-300`}
+      className="fixed w-full top-0 z-50 transition-all duration-300"
     >
       <div className="container mx-auto px-4 py-2">
         <div className={`mx-auto rounded-full px-4 py-2 transition-all duration-300 ${

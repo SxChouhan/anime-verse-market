@@ -34,6 +34,9 @@
     --ring: 271 42% 50%;
 
     --radius: 0.5rem;
+    
+    /* Add navbar height variable */
+    --navbar-height: 72px;
   }
 
   .dark {
@@ -73,6 +76,11 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+  
+  /* Ensure all main elements have proper padding for navbar */
+  main, .page-content {
+    padding-top: var(--navbar-height);
   }
 }
 
