@@ -24,90 +24,92 @@ const Navbar = () => {
 
   return (
     <header 
-      className={`fixed w-full top-0 z-50 transition-all duration-300 ${
-        isScrolled 
-          ? 'bg-otaku-dark/70 backdrop-blur-md shadow-lg' 
-          : 'bg-transparent'
-      }`}
+      className={`fixed w-full top-0 z-50 transition-all duration-300`}
     >
-      <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between py-4">
-          <Link to="/" className="text-white text-xl font-bold drop-shadow-md">
-            Otaku Collective
-          </Link>
+      <div className="container mx-auto px-4 py-2">
+        <div className={`mx-auto rounded-full px-4 py-2 transition-all duration-300 ${
+          isScrolled 
+            ? 'bg-otaku-dark/70 backdrop-blur-lg shadow-lg' 
+            : 'bg-black/30 backdrop-blur-sm'
+        }`}>
+          <div className="flex items-center justify-between">
+            <Link to="/" className="text-white text-xl font-bold drop-shadow-md">
+              Otaku Collective
+            </Link>
 
-          <nav className="hidden md:flex items-center space-x-6">
-            <Link to="/merchandise" className="text-white hover:text-otaku-purple transition-colors font-medium">
-              Merchandise
-            </Link>
-            <Link to="/costumes" className="text-white hover:text-otaku-purple transition-colors font-medium">
-              Costumes
-            </Link>
-            <Link to="/figures" className="text-white hover:text-otaku-purple transition-colors font-medium">
-              Figures
-            </Link>
-            <Link to="/posters" className="text-white hover:text-otaku-purple transition-colors font-medium">
-              Posters
-            </Link>
-            <Link to="/unique" className="text-white hover:text-otaku-purple transition-colors font-medium">
-              Unique
-            </Link>
-            <Link to="/custom" className="text-white hover:text-otaku-purple transition-colors font-medium">
-              Custom
-            </Link>
-          </nav>
+            <nav className="hidden md:flex items-center space-x-6">
+              <Link to="/merchandise" className="text-white hover:text-otaku-purple transition-colors font-medium">
+                Merchandise
+              </Link>
+              <Link to="/costumes" className="text-white hover:text-otaku-purple transition-colors font-medium">
+                Costumes
+              </Link>
+              <Link to="/figures" className="text-white hover:text-otaku-purple transition-colors font-medium">
+                Figures
+              </Link>
+              <Link to="/posters" className="text-white hover:text-otaku-purple transition-colors font-medium">
+                Posters
+              </Link>
+              <Link to="/unique" className="text-white hover:text-otaku-purple transition-colors font-medium">
+                Unique
+              </Link>
+              <Link to="/custom" className="text-white hover:text-otaku-purple transition-colors font-medium">
+                Custom
+              </Link>
+            </nav>
 
-          <div className="flex items-center space-x-4">
-            <Button 
-              variant="ghost" 
-              size="icon" 
-              className="text-white relative hover:bg-white/10 rounded-full"
-              onClick={() => navigate('/cart')}
-            >
-              <ShoppingCart size={20} />
-              {getTotalItems() > 0 && (
-                <span className="absolute -top-2 -right-2 bg-otaku-purple text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
-                  {getTotalItems()}
-                </span>
-              )}
-            </Button>
-
-            {user ? (
-              <div className="relative group">
-                <Button 
-                  variant="ghost" 
-                  size="icon"
-                  className="text-white hover:bg-white/10 rounded-full"
-                  onClick={() => navigate('/profile')}
-                >
-                  <User size={20} />
-                </Button>
-              </div>
-            ) : (
+            <div className="flex items-center space-x-4">
               <Button 
-                variant="outline" 
-                size="sm" 
-                className="border-otaku-purple text-white hover:bg-otaku-purple/80 bg-otaku-purple/50 hover:text-white rounded-full"
-                onClick={() => navigate('/login')}
+                variant="ghost" 
+                size="icon" 
+                className="text-white relative hover:bg-white/10 rounded-full"
+                onClick={() => navigate('/cart')}
               >
-                Login
+                <ShoppingCart size={20} />
+                {getTotalItems() > 0 && (
+                  <span className="absolute -top-2 -right-2 bg-otaku-purple text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
+                    {getTotalItems()}
+                  </span>
+                )}
               </Button>
-            )}
 
-            <Button
-              variant="ghost"
-              size="icon"
-              className="md:hidden text-white hover:bg-white/10 rounded-full"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            >
-              {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </Button>
+              {user ? (
+                <div className="relative group">
+                  <Button 
+                    variant="ghost" 
+                    size="icon"
+                    className="text-white hover:bg-white/10 rounded-full"
+                    onClick={() => navigate('/profile')}
+                  >
+                    <User size={20} />
+                  </Button>
+                </div>
+              ) : (
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  className="border-otaku-purple text-white hover:bg-otaku-purple hover:text-white bg-otaku-purple/50 rounded-full"
+                  onClick={() => navigate('/login')}
+                >
+                  Login
+                </Button>
+              )}
+
+              <Button
+                variant="ghost"
+                size="icon"
+                className="md:hidden text-white hover:bg-white/10 rounded-full"
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              >
+                {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              </Button>
+            </div>
           </div>
         </div>
       </div>
 
       {mobileMenuOpen && (
-        <div className="md:hidden bg-otaku-dark/80 backdrop-blur-md py-4 border-t border-gray-800 animate-fade-in">
+        <div className="md:hidden bg-otaku-dark/80 backdrop-blur-lg py-4 border-t border-gray-800 animate-fade-in">
           <div className="container mx-auto px-4 flex flex-col space-y-4">
             <Link 
               to="/merchandise" 
