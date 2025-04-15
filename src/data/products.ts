@@ -189,12 +189,5 @@ export const getProductCategories = (): string[] => {
     "Posters",
     "Costumes",
     "Unique",
-    "Keychains",
-    "Phone Cases",
-    "Plushies",
-    "Accessories",
-    "Wall Scrolls",
-    "Bags",
-    "Clothing"
   ];
 };

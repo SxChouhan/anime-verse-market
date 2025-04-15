@@ -43,43 +43,43 @@ const HeroSection = () => {
   return (
     <section className="relative h-screen w-full overflow-hidden flex items-center">
       <div className="absolute inset-0 z-0">
-        <video 
+        <video
           ref={videoRef}
-          autoPlay 
-          muted 
-          loop 
+          autoPlay
+          muted
+          loop
           playsInline
-          className={`w-full h-full object-cover ${isVideoLoaded ? 'opacity-100' : 'opacity-0'}`}
+          className={`w-full h-full object-cover ${isVideoLoaded ? 'opacity100' : 'opacity-100'}`}
         >
           <source src="/src/resource/Home Page/hero-section.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
-        
+
         <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent z-10"></div>
       </div>
-      
+
       <div className="container mx-auto px-4 relative z-20 mt-16">
         <div className="max-w-2xl">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 animate-fade-in drop-shadow-lg">
             Your One-Stop Shop for Premium <br />
-            <TypewriterText 
+            <TypewriterText
               textArray={typewriterTexts}
               className="text-otaku-purple font-extrabold"
             />
           </h1>
-          
+
           <div className="flex flex-wrap gap-4">
-            <Button 
+            <Button
               onClick={scrollToTrending}
               size="lg"
               className="bg-otaku-purple hover:bg-otaku-purple/90 text-white font-medium"
             >
               Shop Now <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
-            
+
             {!user && (
-              <Button 
-                variant="outline" 
+              <Button
+                variant="outline"
                 size="lg"
                 className="border-white/70 text-otaku-dark hover:bg-white hover:text-otaku-dark font-medium flex items-center gap-2 transition-all duration-300 ease-in-out"
                 onClick={handleLoginClick}

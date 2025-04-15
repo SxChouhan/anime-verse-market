@@ -1,9 +1,39 @@
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { getAnimeCategories } from '@/data/products';
+
+// All available anime images
+const availableAnimeImages = [
+  'Attack on Titan',
+  'Bleach',
+  'Chainsaw Man',
+  'Death Note',
+  'Demon Slayer',
+  'Dr. Stone',
+  'Hunter x Hunter',
+  'Jujutsu Kaisen',
+  'My Hero Academia',
+  'Naruto',
+  'One Piece',
+  'Solo Leveling',
+  'Tokyo Revengers'
+];
+
+// Helper function to map anime names to image filenames
+const getAnimeImageFilename = (anime: string): string => {
+  // Handle special cases
+  switch(anime) {
+    case 'Hunter x Hunter':
+      return 'hunterxhunter';
+    case 'Dr. Stone':
+      return 'dr.-stone';
+    default:
+      return anime.toLowerCase().replace(/\s+/g, '-');
+  }
+};
 
 const AnimeCategories = () => {
-  const animeCategories = getAnimeCategories().slice(0, 11);
+  // Use our predefined list of anime with images instead of the data-driven list
+  const animeCategories = availableAnimeImages;
 
   return (
     <section className="py-16 bg-gradient-to-r from-gray-50 to-white dark:from-otaku-dark/50 dark:to-otaku-dark/30">
@@ -11,17 +41,17 @@ const AnimeCategories = () => {
         <h2 className="text-3xl font-bold text-center mb-12">
           Shop by Anime
         </h2>
-        
+
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
           {animeCategories.map(anime => (
-            <Link 
-              key={anime} 
+            <Link
+              key={anime}
               to={`/anime/${anime.toLowerCase().replace(/\s+/g, '-')}`}
               className="bg-gray-100 dark:bg-otaku-dark rounded-lg overflow-hidden group hover:shadow-lg transition-all duration-300"
             >
               <div className="aspect-square bg-gray-200 dark:bg-gray-800 relative">
-                <img 
-                  src={`/src/resource/Home Page/Anime Category/${anime.replace(/\s+/g, ' ')}.jpeg`}
+                <img
+                  src={`/src/resource/Home Page/Anime Category/${getAnimeImageFilename(anime)}.jpeg`}
                   alt={anime}
                   className="w-full h-full object-cover"
                   onError={(e) => {
@@ -35,7 +65,7 @@ const AnimeCategories = () => {
                   </span>
                 </div>
               </div>
-              
+
               <div className="p-3 text-center">
                 <h3 className="font-medium text-sm truncate group-hover:text-otaku-purple transition-colors">
                   {anime}
@@ -44,10 +74,10 @@ const AnimeCategories = () => {
             </Link>
           ))}
         </div>
-        
+
         <div className="text-center mt-12">
-          <Button 
-            variant="outline" 
+          <Button
+            variant="outline"
             size="lg"
             className="border-otaku-purple text-otaku-purple hover:bg-otaku-purple hover:text-white"
             asChild
