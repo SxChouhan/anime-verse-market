@@ -71,7 +71,7 @@ const Home = () => {
             playsInline
             className="w-full h-full object-cover opacity-70"
           >
-            <source src="https://cdn.jsdelivr.net/gh/codewithsadee/animeflix/assets/images/hero-banner.mp4" type="video/mp4" />
+            <source src="/src/resource/Home Page/Hero Section.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
           
@@ -152,7 +152,7 @@ const Home = () => {
               >
                 <div className="aspect-square bg-gray-200 dark:bg-gray-800 relative">
                   <img 
-                    src={`/placeholder.svg`} 
+                    src={`/src/resource/Home Page/Anime Category/${anime}.jpeg`}
                     alt={anime}
                     className="w-full h-full object-cover"
                   />
@@ -199,7 +199,7 @@ const Home = () => {
                 className="group relative overflow-hidden rounded-lg shadow-md h-64"
               >
                 <img 
-                  src="/placeholder.svg" 
+                  src={`/src/resource/Home Page/Product Category/${category}.jpeg`}
                   alt={category}
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
