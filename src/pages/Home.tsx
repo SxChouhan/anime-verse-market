@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ArrowRight, LogIn } from 'lucide-react';
@@ -63,7 +62,6 @@ const Home = () => {
       <Navbar />
       
       <section className="relative h-screen w-full overflow-hidden flex items-center">
-        {/* Video container with proper z-index */}
         <div className="absolute inset-0 z-0">
           <video 
             ref={videoRef}
@@ -77,8 +75,7 @@ const Home = () => {
             Your browser does not support the video tag.
           </video>
           
-          {/* Gradient overlay positioned above the video but below the content */}
-          <div className="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-transparent z-10"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent z-10"></div>
         </div>
         
         <div className="container mx-auto px-4 relative z-20 mt-16">
@@ -199,7 +196,14 @@ const Home = () => {
           </h2>
           
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-            {productCategories.map(category => (
+            {[
+              "Figures",
+              "Merchandise",
+              "Stickers",
+              "Posters",
+              "Costumes",
+              "Unique"
+            ].map(category => (
               <Link 
                 key={category}
                 to={`/${category.toLowerCase()}`}
@@ -211,7 +215,7 @@ const Home = () => {
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                   onError={(e) => {
                     console.error(`Failed to load image for ${category}`);
-                    e.currentTarget.src = "/placeholder.svg"; // Fallback image
+                    e.currentTarget.src = "/placeholder.svg";
                   }}
                 />
                 

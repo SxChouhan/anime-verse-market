@@ -1,4 +1,3 @@
-
 export type Product = {
   id: string;
   name: string;
@@ -183,6 +182,19 @@ export const getAnimeCategories = (): string[] => {
 };
 
 export const getProductCategories = (): string[] => {
-  const categorySet = new Set(products.map(product => product.category));
-  return Array.from(categorySet);
+  return [
+    "Figures",
+    "Merchandise",
+    "Stickers",
+    "Posters",
+    "Costumes",
+    "Unique",
+    "Keychains",
+    "Phone Cases",
+    "Plushies",
+    "Accessories",
+    "Wall Scrolls",
+    "Bags",
+    "Clothing"
+  ];
 };
