@@ -1,4 +1,3 @@
-
 import { useRef, useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ArrowRight, LogIn } from 'lucide-react';
@@ -50,9 +49,9 @@ const HeroSection = () => {
           muted 
           loop 
           playsInline
-          className={`w-full h-full object-cover ${isVideoLoaded ? 'opacity-70' : 'opacity-0'}`}
+          className={`w-full h-full object-cover ${isVideoLoaded ? 'opacity-100' : 'opacity-0'}`}
         >
-          <source src="/src/resource/Home Page/Hero Section.mp4" type="video/mp4" />
+          <source src="/src/resource/Home Page/hero-section.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
         
@@ -82,7 +81,7 @@ const HeroSection = () => {
               <Button 
                 variant="outline" 
                 size="lg"
-                className="border-white/70 text-white hover:bg-white hover:text-otaku-dark font-medium flex items-center gap-2 transition-all duration-300 ease-in-out"
+                className="border-white/70 text-otaku-dark hover:bg-white hover:text-otaku-dark font-medium flex items-center gap-2 transition-all duration-300 ease-in-out"
                 onClick={handleLoginClick}
               >
                 <LogIn className="h-5 w-5" /> Login
