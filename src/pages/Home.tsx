@@ -1,3 +1,4 @@
+
 import { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ArrowRight, LogIn } from 'lucide-react';
@@ -62,6 +63,7 @@ const Home = () => {
       <Navbar />
       
       <section className="relative h-screen w-full overflow-hidden flex items-center">
+        {/* Video container with proper z-index */}
         <div className="absolute inset-0 z-0">
           <video 
             ref={videoRef}
@@ -69,16 +71,17 @@ const Home = () => {
             muted 
             loop 
             playsInline
-            className="w-full h-full object-cover opacity-70"
+            className={`w-full h-full object-cover ${isVideoLoaded ? 'opacity-70' : 'opacity-0'}`}
           >
             <source src="/src/resource/Home Page/Hero Section.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
           
-          <div className="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-transparent"></div>
+          {/* Gradient overlay positioned above the video but below the content */}
+          <div className="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-transparent z-10"></div>
         </div>
         
-        <div className="container mx-auto px-4 relative z-10 mt-16">
+        <div className="container mx-auto px-4 relative z-20 mt-16">
           <div className="max-w-2xl">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 animate-fade-in drop-shadow-lg">
               Your One-Stop Shop for Premium <br />
@@ -101,7 +104,7 @@ const Home = () => {
                 <Button 
                   variant="outline" 
                   size="lg"
-                  className="border-white/70 text-otaku-dark hover:bg-white hover:text-otaku-dark font-medium flex items-center gap-2 transition-all duration-300 ease-in-out"
+                  className="border-white/70 text-white hover:bg-white hover:text-otaku-dark font-medium flex items-center gap-2 transition-all duration-300 ease-in-out"
                   onClick={handleLoginClick}
                 >
                   <LogIn className="h-5 w-5" /> Login
@@ -152,9 +155,13 @@ const Home = () => {
               >
                 <div className="aspect-square bg-gray-200 dark:bg-gray-800 relative">
                   <img 
-                    src={`/src/resource/Home Page/Anime Category/${anime}.jpeg`}
+                    src={`/src/resource/Home Page/Anime Category/${anime.replace(/\s+/g, ' ')}.jpeg`}
                     alt={anime}
                     className="w-full h-full object-cover"
+                    onError={(e) => {
+                      console.error(`Failed to load image for ${anime}`);
+                      e.currentTarget.src = "/placeholder.svg"; // Fallback image
+                    }}
                   />
                   <div className="absolute inset-0 bg-otaku-purple/0 group-hover:bg-otaku-purple/20 transition-all duration-300 flex items-center justify-center">
                     <span className="text-white font-medium opacity-0 group-hover:opacity-100 transform group-hover:scale-100 scale-95 transition-all duration-300">
@@ -202,6 +209,10 @@ const Home = () => {
                   src={`/src/resource/Home Page/Product Category/${category}.jpeg`}
                   alt={category}
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  onError={(e) => {
+                    console.error(`Failed to load image for ${category}`);
+                    e.currentTarget.src = "/placeholder.svg"; // Fallback image
+                  }}
                 />
                 
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-6">
