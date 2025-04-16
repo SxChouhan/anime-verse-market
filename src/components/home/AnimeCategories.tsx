@@ -1,3 +1,4 @@
+
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 
@@ -51,7 +52,7 @@ const AnimeCategories = () => {
             >
               <div className="aspect-square bg-gray-200 dark:bg-gray-800 relative">
                 <img
-                  src={`/src/resource/Home Page/Anime Category/${getAnimeImageFilename(anime)}.jpeg`}
+                  src={`/resource/Home Page/Anime Category/${getAnimeImageFilename(anime)}.jpeg`}
                   alt={anime}
                   className="w-full h-full object-cover"
                   onError={(e) => {
