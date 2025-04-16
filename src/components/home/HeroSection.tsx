@@ -52,7 +52,7 @@ const HeroSection = () => {
           playsInline
           className={`w-full h-full object-cover ${isVideoLoaded ? 'opacity100' : 'opacity-0'}`}
         >
-          <source src="/resource/Home Page/hero-section.mp4" type="video/mp4" />
+          <source src="/src/resource/Home Page/hero-section.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
 

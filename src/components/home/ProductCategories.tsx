@@ -27,7 +27,7 @@ const ProductCategories = () => {
               className="group relative overflow-hidden rounded-lg shadow-md h-64"
             >
               <img
-                src={`/resource/Home Page/Product Category/${category}.jpeg`}
+                src={`/src/resource/Home Page/Product Category/${category}.jpeg`}
                 alt={category}
                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 onError={(e) => {
