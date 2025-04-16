@@ -8,7 +8,7 @@ const TrendingSection = () => {
   const trendingProducts = getTrendingProducts().slice(0, 8);
 
   return (
-    <section id="trending-section" className="py-16 bg-gradient-to-b from-gray-100 to-white dark:from-otaku-dark/40 dark:to-otaku-dark/20">
+    <section id="trending-section" className="py-16">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl font-bold text-center mb-12">
           Trending Products
