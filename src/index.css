@@ -37,6 +37,11 @@
     
     /* Add navbar height variable */
     --navbar-height: 72px;
+
+    /* Add responsive navbar height variables */
+    --navbar-height-mobile: 64px;
+    --navbar-height-tablet: 68px;
+    --navbar-height-desktop: 72px;
   }
 
   .dark {
@@ -78,7 +83,26 @@
     @apply bg-background text-foreground;
   }
   
-  /* Ensure all main elements have proper padding for navbar */
+  /* Responsive navbar padding for different screen sizes */
+  @media (max-width: 640px) {
+    main, .page-content {
+      padding-top: var(--navbar-height-mobile);
+    }
+  }
+  
+  @media (min-width: 641px) and (max-width: 1024px) {
+    main, .page-content {
+      padding-top: var(--navbar-height-tablet);
+    }
+  }
+  
+  @media (min-width: 1025px) {
+    main, .page-content {
+      padding-top: var(--navbar-height-desktop);
+    }
+  }
+  
+  /* Default for broader compatibility */
   main, .page-content {
     padding-top: var(--navbar-height);
   }
@@ -134,4 +158,22 @@
 /* Add drop shadow for text visibility */
 .text-shadow {
   text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+}
+
+/* Responsive typography classes */
+.responsive-heading {
+  @apply text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold;
+}
+
+.responsive-subheading {
+  @apply text-lg sm:text-xl md:text-2xl font-medium;
+}
+
+.responsive-text {
+  @apply text-sm sm:text-base md:text-lg;
+}
+
+/* Logo font size adjustments */
+.logo-text {
+  @apply text-lg sm:text-xl md:text-2xl font-bold;
 }

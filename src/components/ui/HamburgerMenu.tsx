@@ -1,5 +1,5 @@
+
 import React from 'react';
-import styled from 'styled-components';
 
 interface HamburgerMenuProps {
   isOpen: boolean;
@@ -8,81 +8,27 @@ interface HamburgerMenuProps {
 
 const HamburgerMenu: React.FC<HamburgerMenuProps> = ({ isOpen, toggleMenu }) => {
   return (
-    <StyledWrapper>
-      <label htmlFor="burger" className="burger">
+    <div className="relative">
+      <label htmlFor="burger" className="relative block w-7 h-5 cursor-pointer">
         <input
           id="burger"
           type="checkbox"
           checked={isOpen}
           onChange={toggleMenu}
+          className="hidden"
         />
-        <span />
-        <span />
-        <span />
+        <span className={`block absolute h-0.5 w-full bg-white rounded-full left-0 transform transition-all duration-300 ${
+          isOpen ? 'top-0 left-0.5 rotate-45' : 'top-0'
+        }`} />
+        <span className={`block absolute h-0.5 w-full bg-white rounded-full left-0 top-1/2 -translate-y-1/2 transform transition-all duration-300 ${
+          isOpen ? 'w-0 opacity-0' : ''
+        }`} />
+        <span className={`block absolute h-0.5 w-full bg-white rounded-full left-0 transform transition-all duration-300 ${
+          isOpen ? 'top-2 left-0.5 -rotate-45' : 'top-4'
+        }`} />
       </label>
-    </StyledWrapper>
+    </div>
   );
 }
-
-const StyledWrapper = styled.div`
-  .burger {
-    position: relative;
-    width: 28px;
-    height: 20px;
-    background: transparent;
-    cursor: pointer;
-    display: block;
-  }
-
-  .burger input {
-    display: none;
-  }
-
-  .burger span {
-    display: block;
-    position: absolute;
-    height: 2px;
-    width: 100%;
-    background: white;
-    border-radius: 4px;
-    opacity: 1;
-    left: 0;
-    transform: rotate(0deg);
-    transition: .25s ease-in-out;
-  }
-
-  .burger span:nth-of-type(1) {
-    top: 0px;
-    transform-origin: left center;
-  }
-
-  .burger span:nth-of-type(2) {
-    top: 50%;
-    transform: translateY(-50%);
-    transform-origin: left center;
-  }
-
-  .burger span:nth-of-type(3) {
-    top: 100%;
-    transform-origin: left center;
-    transform: translateY(-50%);
-  }
-
-  .burger input:checked ~ span:nth-of-type(1) {
-    top: 0;
-    left: 3px;
-    transform: rotate(405deg);
-  }
-
-  .burger input:checked ~ span:nth-of-type(2) {
-    width: 0%;
-    opacity: 0;
-  }
-
-  .burger input:checked ~ span:nth-of-type(3) {
-    top: 18px;
-    left: 3px;
-    transform: rotate(-405deg);
-  }`;
 
 export default HamburgerMenu;

@@ -6,6 +6,7 @@ import HamburgerMenu from '@/components/ui/HamburgerMenu';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/context/AuthContext';
 import { useCart } from '@/context/CartContext';
+import { useBreakpoint } from '@/hooks/use-mobile';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -14,6 +15,9 @@ const Navbar = () => {
   const location = useLocation();
   const { user, logout } = useAuth();
   const { getTotalItems } = useCart();
+  const breakpoint = useBreakpoint();
+  
+  const isDesktop = breakpoint === 'desktop' || breakpoint === 'laptop';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -23,16 +27,25 @@ const Navbar = () => {
     window.addEventListener('scroll', handleScroll);
 
     // Set CSS variable for navbar height to be used by other components
-    document.documentElement.style.setProperty('--navbar-height', '72px'); // Adjust if needed
+    document.documentElement.style.setProperty('--navbar-height', '72px');
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
+  // Close mobile menu when screen size changes to desktop
+  useEffect(() => {
+    if (isDesktop && mobileMenuOpen) {
+      setMobileMenuOpen(false);
+    }
+  }, [isDesktop, mobileMenuOpen]);
+
   // Scroll to top when route changes
   useEffect(() => {
     window.scrollTo(0, 0);
+    // Close mobile menu when route changes
+    setMobileMenuOpen(false);
   }, [location.pathname]);
 
   const handleNavigation = (path: string) => {
@@ -53,6 +66,15 @@ const Navbar = () => {
     setMobileMenuOpen(false);
   };
 
+  const navItems = [
+    { name: 'Merchandise', path: '/merchandise' },
+    { name: 'Costumes', path: '/costumes' },
+    { name: 'Figures', path: '/figures' },
+    { name: 'Posters', path: '/posters' },
+    { name: 'Unique', path: '/unique' },
+    { name: 'Custom', path: '/custom' },
+  ];
+
   return (
     <header
       className="fixed w-full top-0 z-50 transition-all duration-300"
@@ -64,54 +86,29 @@ const Navbar = () => {
             : 'bg-black/30 backdrop-blur-sm'
         }`}>
           <div className="flex items-center justify-between">
+            {/* Logo as a single element */}
             <a
               href="/"
-              className="text-white text-xl font-bold drop-shadow-md"
+              className="text-white text-xl font-bold drop-shadow-md whitespace-nowrap"
               onClick={handleLogoClick}
             >
               Otaku Collective
             </a>
 
-            <nav className="hidden md:flex items-center space-x-6">
-              <button
-                className="text-white hover:text-otaku-purple transition-colors font-medium"
-                onClick={() => handleNavigation('/merchandise')}
-              >
-                Merchandise
-              </button>
-              <button
-                className="text-white hover:text-otaku-purple transition-colors font-medium"
-                onClick={() => handleNavigation('/costumes')}
-              >
-                Costumes
-              </button>
-              <button
-                className="text-white hover:text-otaku-purple transition-colors font-medium"
-                onClick={() => handleNavigation('/figures')}
-              >
-                Figures
-              </button>
-              <button
-                className="text-white hover:text-otaku-purple transition-colors font-medium"
-                onClick={() => handleNavigation('/posters')}
-              >
-                Posters
-              </button>
-              <button
-                className="text-white hover:text-otaku-purple transition-colors font-medium"
-                onClick={() => handleNavigation('/unique')}
-              >
-                Unique
-              </button>
-              <button
-                className="text-white hover:text-otaku-purple transition-colors font-medium"
-                onClick={() => handleNavigation('/custom')}
-              >
-                Custom
-              </button>
+            {/* Desktop Navigation Menu */}
+            <nav className="hidden md:flex items-center space-x-4 lg:space-x-6">
+              {navItems.map((item) => (
+                <button
+                  key={item.name}
+                  className="text-white hover:text-otaku-purple transition-colors font-medium text-sm lg:text-base"
+                  onClick={() => handleNavigation(item.path)}
+                >
+                  {item.name}
+                </button>
+              ))}
             </nav>
 
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-2 sm:space-x-4">
               <Button
                 variant="ghost"
                 size="icon"
@@ -141,14 +138,14 @@ const Navbar = () => {
                 <Button
                   variant="outline"
                   size="sm"
-                  className="border-otaku-purple text-white hover:bg-otaku-purple hover:text-white bg-otaku-purple/50 rounded-full"
+                  className="border-otaku-purple text-white hover:bg-otaku-purple hover:text-white bg-otaku-purple/50 rounded-full hidden sm:flex"
                   onClick={() => handleNavigation('/login')}
                 >
                   Login
                 </Button>
               )}
 
-              <div className="md:hidden ml-2">
+              <div className="md:hidden">
                 <HamburgerMenu
                   isOpen={mobileMenuOpen}
                   toggleMenu={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -159,45 +156,29 @@ const Navbar = () => {
         </div>
       </div>
 
+      {/* Mobile Navigation Menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-otaku-dark/80 backdrop-blur-lg py-4 border-t border-gray-800 animate-fade-in">
+        <div className="md:hidden bg-otaku-dark/90 backdrop-blur-lg py-4 border-t border-gray-800 animate-fade-in">
           <div className="container mx-auto px-4 flex flex-col space-y-4">
-            <button
-              className="text-white hover:text-otaku-purple transition-colors font-medium text-left"
-              onClick={() => handleNavigation('/merchandise')}
-            >
-              Merchandise
-            </button>
-            <button
-              className="text-white hover:text-otaku-purple transition-colors font-medium text-left"
-              onClick={() => handleNavigation('/costumes')}
-            >
-              Costumes
-            </button>
-            <button
-              className="text-white hover:text-otaku-purple transition-colors font-medium text-left"
-              onClick={() => handleNavigation('/figures')}
-            >
-              Figures
-            </button>
-            <button
-              className="text-white hover:text-otaku-purple transition-colors font-medium text-left"
-              onClick={() => handleNavigation('/posters')}
-            >
-              Posters
-            </button>
-            <button
-              className="text-white hover:text-otaku-purple transition-colors font-medium text-left"
-              onClick={() => handleNavigation('/unique')}
-            >
-              Unique
-            </button>
-            <button
-              className="text-white hover:text-otaku-purple transition-colors font-medium text-left"
-              onClick={() => handleNavigation('/custom')}
-            >
-              Custom
-            </button>
+            {navItems.map((item) => (
+              <button
+                key={item.name}
+                className="text-white hover:text-otaku-purple transition-colors font-medium text-left py-2"
+                onClick={() => handleNavigation(item.path)}
+              >
+                {item.name}
+              </button>
+            ))}
+            {!user && (
+              <Button
+                variant="outline"
+                size="sm"
+                className="border-otaku-purple text-white hover:bg-otaku-purple hover:text-white bg-otaku-purple/50 rounded-full w-full mt-2"
+                onClick={() => handleNavigation('/login')}
+              >
+                Login
+              </Button>
+            )}
           </div>
         </div>
       )}

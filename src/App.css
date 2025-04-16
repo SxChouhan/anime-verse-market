@@ -1,8 +1,8 @@
 
 #root {
-  max-width: 1280px;
+  max-width: 100%;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 0;
   text-align: center;
 }
 
@@ -42,12 +42,59 @@
   color: #888;
 }
 
-/* Add space for the navbar on all pages */
-main {
-  padding-top: var(--navbar-height, 72px);
+/* Responsive navbar padding - this creates consistent spacing across the site */
+@media (max-width: 640px) {
+  main, .page-content {
+    padding-top: var(--navbar-height-mobile, 64px);
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  main, .page-content {
+    padding-top: var(--navbar-height-tablet, 68px);
+  }
+}
+
+@media (min-width: 1025px) {
+  main, .page-content {
+    padding-top: var(--navbar-height-desktop, 72px);
+  }
 }
 
 /* For pages that don't use the main tag directly */
 .page-content {
   padding-top: var(--navbar-height, 72px);
+}
+
+/* Responsive container */
+.responsive-container {
+  width: 100%;
+  padding-right: 1rem;
+  padding-left: 1rem;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+@media (min-width: 640px) {
+  .responsive-container {
+    max-width: 640px;
+  }
+}
+
+@media (min-width: 768px) {
+  .responsive-container {
+    max-width: 768px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .responsive-container {
+    max-width: 1024px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .responsive-container {
+    max-width: 1280px;
+  }
 }
