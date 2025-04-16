@@ -37,8 +37,7 @@ const HeroSection = () => {
     'Costumes',
     'Figures',
     'Posters',
-    'Stickers',
-    'Unique Products'
+    'Stickers'
   ];
 
   return (
@@ -62,7 +61,7 @@ const HeroSection = () => {
       <div className="container mx-auto px-4 relative z-20 mt-16">
         <div className="max-w-2xl">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 animate-fade-in drop-shadow-lg">
-            Your One-Stop Shop for Premium <br />
+            One-Stop Otaku Island for Premium <br />
             <TypewriterText
               textArray={typewriterTexts}
               className="text-otaku-purple font-extrabold"
