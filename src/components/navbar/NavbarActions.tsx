@@ -15,7 +15,7 @@ interface NavbarActionsProps {
 const NavbarActions = ({ mobileMenuOpen, toggleMobileMenu, handleNavigation }: NavbarActionsProps) => {
   const { user } = useAuth();
   const { getTotalItems } = useCart();
-  
+
   return (
     <div className="flex items-center space-x-2 sm:space-x-4">
       <Button
@@ -54,7 +54,7 @@ const NavbarActions = ({ mobileMenuOpen, toggleMobileMenu, handleNavigation }: N
         </Button>
       )}
 
-      <div className="md:hidden">
+      <div className="md:hidden flex items-center">
         <HamburgerMenu
           isOpen={mobileMenuOpen}
           toggleMenu={toggleMobileMenu}
