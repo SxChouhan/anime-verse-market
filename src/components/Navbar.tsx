@@ -1,7 +1,8 @@
 
 import { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { Menu, X, ShoppingCart, User } from 'lucide-react';
+import { ShoppingCart, User } from 'lucide-react';
+import HamburgerMenu from '@/components/ui/HamburgerMenu';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/context/AuthContext';
 import { useCart } from '@/context/CartContext';
@@ -20,10 +21,10 @@ const Navbar = () => {
     };
 
     window.addEventListener('scroll', handleScroll);
-    
+
     // Set CSS variable for navbar height to be used by other components
     document.documentElement.style.setProperty('--navbar-height', '72px'); // Adjust if needed
-    
+
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
@@ -53,18 +54,18 @@ const Navbar = () => {
   };
 
   return (
-    <header 
+    <header
       className="fixed w-full top-0 z-50 transition-all duration-300"
     >
       <div className="container mx-auto px-4 py-2">
         <div className={`mx-auto rounded-full px-4 py-2 transition-all duration-300 ${
-          isScrolled 
-            ? 'bg-otaku-dark/70 backdrop-blur-lg shadow-lg' 
+          isScrolled
+            ? 'bg-otaku-dark/70 backdrop-blur-lg shadow-lg'
             : 'bg-black/30 backdrop-blur-sm'
         }`}>
           <div className="flex items-center justify-between">
-            <a 
-              href="/" 
+            <a
+              href="/"
               className="text-white text-xl font-bold drop-shadow-md"
               onClick={handleLogoClick}
             >
@@ -72,37 +73,37 @@ const Navbar = () => {
             </a>
 
             <nav className="hidden md:flex items-center space-x-6">
-              <button 
+              <button
                 className="text-white hover:text-otaku-purple transition-colors font-medium"
                 onClick={() => handleNavigation('/merchandise')}
               >
                 Merchandise
               </button>
-              <button 
+              <button
                 className="text-white hover:text-otaku-purple transition-colors font-medium"
                 onClick={() => handleNavigation('/costumes')}
               >
                 Costumes
               </button>
-              <button 
+              <button
                 className="text-white hover:text-otaku-purple transition-colors font-medium"
                 onClick={() => handleNavigation('/figures')}
               >
                 Figures
               </button>
-              <button 
+              <button
                 className="text-white hover:text-otaku-purple transition-colors font-medium"
                 onClick={() => handleNavigation('/posters')}
               >
                 Posters
               </button>
-              <button 
+              <button
                 className="text-white hover:text-otaku-purple transition-colors font-medium"
                 onClick={() => handleNavigation('/unique')}
               >
                 Unique
               </button>
-              <button 
+              <button
                 className="text-white hover:text-otaku-purple transition-colors font-medium"
                 onClick={() => handleNavigation('/custom')}
               >
@@ -111,9 +112,9 @@ const Navbar = () => {
             </nav>
 
             <div className="flex items-center space-x-4">
-              <Button 
-                variant="ghost" 
-                size="icon" 
+              <Button
+                variant="ghost"
+                size="icon"
                 className="text-white relative hover:bg-white/10 rounded-full"
                 onClick={() => handleNavigation('/cart')}
               >
@@ -127,8 +128,8 @@ const Navbar = () => {
 
               {user ? (
                 <div className="relative group">
-                  <Button 
-                    variant="ghost" 
+                  <Button
+                    variant="ghost"
                     size="icon"
                     className="text-white hover:bg-white/10 rounded-full"
                     onClick={() => handleNavigation('/profile')}
@@ -137,9 +138,9 @@ const Navbar = () => {
                   </Button>
                 </div>
               ) : (
-                <Button 
-                  variant="outline" 
-                  size="sm" 
+                <Button
+                  variant="outline"
+                  size="sm"
                   className="border-otaku-purple text-white hover:bg-otaku-purple hover:text-white bg-otaku-purple/50 rounded-full"
                   onClick={() => handleNavigation('/login')}
                 >
@@ -147,14 +148,12 @@ const Navbar = () => {
                 </Button>
               )}
 
-              <Button
-                variant="ghost"
-                size="icon"
-                className="md:hidden text-white hover:bg-white/10 rounded-full"
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              >
-                {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-              </Button>
+              <div className="md:hidden ml-2">
+                <HamburgerMenu
+                  isOpen={mobileMenuOpen}
+                  toggleMenu={() => setMobileMenuOpen(!mobileMenuOpen)}
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -163,37 +162,37 @@ const Navbar = () => {
       {mobileMenuOpen && (
         <div className="md:hidden bg-otaku-dark/80 backdrop-blur-lg py-4 border-t border-gray-800 animate-fade-in">
           <div className="container mx-auto px-4 flex flex-col space-y-4">
-            <button 
+            <button
               className="text-white hover:text-otaku-purple transition-colors font-medium text-left"
               onClick={() => handleNavigation('/merchandise')}
             >
               Merchandise
             </button>
-            <button 
+            <button
               className="text-white hover:text-otaku-purple transition-colors font-medium text-left"
               onClick={() => handleNavigation('/costumes')}
             >
               Costumes
             </button>
-            <button 
+            <button
               className="text-white hover:text-otaku-purple transition-colors font-medium text-left"
               onClick={() => handleNavigation('/figures')}
             >
               Figures
             </button>
-            <button 
+            <button
               className="text-white hover:text-otaku-purple transition-colors font-medium text-left"
               onClick={() => handleNavigation('/posters')}
             >
               Posters
             </button>
-            <button 
+            <button
               className="text-white hover:text-otaku-purple transition-colors font-medium text-left"
               onClick={() => handleNavigation('/unique')}
             >
               Unique
             </button>
-            <button 
+            <button
               className="text-white hover:text-otaku-purple transition-colors font-medium text-left"
               onClick={() => handleNavigation('/custom')}
             >
