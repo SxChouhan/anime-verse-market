@@ -19,17 +19,19 @@ const availableAnimeImages = [
   'Tokyo Revengers'
 ];
 
-// Helper function to map anime names to image filenames
-const getAnimeImageFilename = (anime: string): string => {
-  // Handle special cases
-  switch(anime) {
-    case 'Hunter x Hunter':
-      return 'hunterxhunter';
-    case 'Dr. Stone':
-      return 'dr.-stone';
-    default:
-      return anime.toLowerCase().replace(/\s+/g, '-');
-  }
+// Helper function to get anime placeholder image based on anime name
+const getAnimePlaceholderImage = (anime: string): string => {
+  // Use different Unsplash images for variety
+  const placeholders = [
+    "https://images.unsplash.com/photo-1649972904349-6e44c42644a7?auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop"
+  ];
+  
+  // Generate a consistent index based on anime name
+  const index = anime.length % placeholders.length;
+  return placeholders[index];
 };
 
 const AnimeCategories = () => {
@@ -52,12 +54,12 @@ const AnimeCategories = () => {
             >
               <div className="aspect-square bg-gray-200 dark:bg-gray-800 relative">
                 <img
-                  src={`/src/resource/Home Page/Anime Category/${getAnimeImageFilename(anime)}.jpeg`}
+                  src={getAnimePlaceholderImage(anime)}
                   alt={anime}
                   className="w-full h-full object-cover"
                   onError={(e) => {
                     console.error(`Failed to load image for ${anime}`);
-                    e.currentTarget.src = "/placeholder.svg";
+                    e.currentTarget.src = "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop";
                   }}
                 />
                 <div className="absolute inset-0 bg-otaku-purple/0 group-hover:bg-otaku-purple/20 transition-all duration-300 flex items-center justify-center">

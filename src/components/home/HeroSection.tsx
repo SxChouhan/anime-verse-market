@@ -67,7 +67,7 @@ const HeroSection = () => {
             className={`w-full h-full object-cover md:object-[center_30%] transition-opacity duration-700 ${isVideoLoaded ? 'opacity-100' : 'opacity-0'}`}
             onError={() => setVideoError(true)}
           >
-            <source src="/src/resource/Home Page/hero-section.mp4" type="video/mp4" />
+            <source src="https://assets.mixkit.co/videos/preview/mixkit-anime-girl-looking-ahead-while-its-snowing-40935-large.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
         ) : (

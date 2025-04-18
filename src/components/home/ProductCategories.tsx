@@ -27,12 +27,12 @@ const ProductCategories = () => {
               className="group relative overflow-hidden rounded-lg shadow-md h-64 bg-gray-100 dark:bg-gray-800"
             >
               <img
-                src={`/src/resource/Home Page/Product Category/${category}.jpeg`}
+                src={`https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop`}
                 alt={category}
                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 onError={(e) => {
                   console.error(`Failed to load image for ${category}`);
-                  e.currentTarget.src = "/placeholder.svg";
+                  e.currentTarget.src = "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop";
                 }}
               />
 
