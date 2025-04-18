@@ -1,56 +1,8 @@
-# Welcome to your Lovable project
+# Anime Verse Market
 
-## Project info
+A one-stop shop for anime merchandise, costumes, figures, and more.
 
-**URL**: https://lovable.dev/projects/6d0e765b-7e06-4a0e-badf-053b4154ff45
-
-## How can I edit this code?
-
-There are several ways of editing your application.
-
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/6d0e765b-7e06-4a0e-badf-053b4154ff45) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
-
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
+## Technologies Used
 
 This project is built with:
 
@@ -60,14 +12,74 @@ This project is built with:
 - shadcn-ui
 - Tailwind CSS
 
-## How can I deploy this project?
+## Running the Server
 
-Simply open [Lovable](https://lovable.dev/projects/6d0e765b-7e06-4a0e-badf-053b4154ff45) and click on Share -> Publish.
+### Prerequisites
 
-## Can I connect a custom domain to my Lovable project?
+- Node.js installed on your machine
 
-Yes it is!
+### Quick Start
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+#### Using the Batch File (Windows)
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+1. **Start the server**:
+   - Double-click the `start-server.bat` file
+   - This will start the Node.js server
+
+2. **Access the website**:
+   - Open your browser and go to http://localhost:8000
+
+3. **Stop the server**:
+   - Press Ctrl+C in the terminal window
+   - Confirm with Y when prompted
+
+#### Using Command Line
+
+1. **Start the server**:
+   ```bash
+   node server.js
+   ```
+
+2. **Access the website**:
+   - Open your browser and go to http://localhost:8000
+
+3. **Stop the server**:
+   - Press Ctrl+C in the terminal window
+
+### Development
+
+For development with auto-reloading:
+
+```sh
+# Install dependencies
+npm i
+
+# Start the development server
+npm run dev
+```
+
+## Making Changes
+
+When you make changes to your code, you need to rebuild the project and restart the server:
+
+1. **Build the project**:
+   ```bash
+   npm run build
+   ```
+
+2. **Restart the server**:
+   - Stop the server (Ctrl+C)
+   - Start it again with `node server.js`
+
+## Server Details
+
+- The website is served using a simple Node.js HTTP server
+- The server runs on port 8000
+- The server serves static files from the `dist` directory
+- The server handles SPA routing by redirecting to index.html for non-file requests
+
+## Troubleshooting
+
+- **Server won't start**: Make sure Node.js is installed and in your PATH
+- **Can't access the website**: Check if the server is running in the terminal
+- **Changes not reflected**: Make sure you've rebuilt the project with `npm run build`

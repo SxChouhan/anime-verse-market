@@ -71,8 +71,8 @@ const HeroSection = () => {
             Your browser does not support the video tag.
           </video>
         ) : (
-          <div className="w-full h-full bg-gradient-to-b from-otaku-dark to-black">
-            <div className="w-full h-full bg-black/70 flex items-center justify-center">
+          <div className="w-full h-full bg-black">
+            <div className="w-full h-full flex items-center justify-center">
               <div className="text-gray-400 text-center p-8">
                 <p>Video could not be loaded</p>
               </div>
@@ -80,13 +80,13 @@ const HeroSection = () => {
           </div>
         )}
 
-        <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/30 to-transparent z-10"></div>
+        {/* Gradient overlays removed */}
       </div>
 
       <div className="container mx-auto px-4 relative z-20 mt-16 md:mt-0">
         <div className="max-w-2xl mx-auto md:mx-0">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 animate-fade-in drop-shadow-lg">
-            One-Stop <span className="text-otaku-purple drop-shadow-[0_10px_2px_rgba(0,0,0,1)]">Otaku Island</span> for Premium <br />
+            One-Stop <span className="text-otaku-purple drop-shadow-[0_10px_4px_rgba(0,0,0,1)]">Otaku Island</span> for Premium <br />
             <TypewriterText
               textArray={typewriterTexts}
               className="text-otaku-purple font-extrabold"
