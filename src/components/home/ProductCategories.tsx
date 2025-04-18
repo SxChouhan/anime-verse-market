@@ -24,7 +24,7 @@ const ProductCategories = () => {
             <Link
               key={category}
               to={`/${category.toLowerCase()}`}
-              className="group relative overflow-hidden rounded-lg shadow-md h-64"
+              className="group relative overflow-hidden rounded-lg shadow-md h-64 bg-gray-100 dark:bg-gray-800"
             >
               <img
                 src={`/src/resource/Home Page/Product Category/${category}.jpeg`}

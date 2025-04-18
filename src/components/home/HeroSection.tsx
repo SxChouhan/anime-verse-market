@@ -65,20 +65,18 @@ const HeroSection = () => {
             loop
             playsInline
             className={`w-full h-full object-cover md:object-[center_30%] transition-opacity duration-700 ${isVideoLoaded ? 'opacity-100' : 'opacity-0'}`}
+            onError={() => setVideoError(true)}
           >
             <source src="/src/resource/Home Page/hero-section.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
         ) : (
           <div className="w-full h-full bg-gradient-to-b from-otaku-dark to-black">
-            <img
-              src="/src/resource/Home Page/hero-fallback.jpg"
-              alt="Hero Background"
-              className="w-full h-full object-cover md:object-[center_30%] opacity-50"
-              onError={(e) => {
-                e.currentTarget.style.display = 'none';
-              }}
-            />
+            <div className="w-full h-full bg-black/70 flex items-center justify-center">
+              <div className="text-gray-400 text-center p-8">
+                <p>Video could not be loaded</p>
+              </div>
+            </div>
           </div>
         )}
 
